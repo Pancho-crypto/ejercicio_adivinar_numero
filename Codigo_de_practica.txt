@@ -1,0 +1,55 @@
+import kotlin.random.Random;
+ 
+fun main() {
+    var numero_magico: Int = Random.nextInt(0, 100);
+    var respuesta = -1;
+    var intentos: Int = 0;
+    println("Bienvenido a mi juego. Adivina el numero magico para ganar. Es un numero entre el 0 y el 100");
+    while (respuesta != numero_magico){
+        print("Por favor introduce un numero sin punto decimal: ");
+        respuesta = validar_numero_de_entrada();
+        // respuesta = validar_rango();
+        
+        if (respuesta == numero_magico){
+            println("Felicidades acertaste el numero magico")
+        }
+        else if (respuesta < numero_magico){
+            println("Este no es el numero magico. El numero magico es mayor")
+            intentos ++;
+            print("Intentos: ${intentos} - ");
+        }
+        else if (respuesta > numero_magico){
+            println("Este no es el numero magico. El numero magico es menor")
+            intentos ++;
+            print("Intentos: ${intentos} - ");
+        }
+        else{
+            println("Este no es un numero dentro del rango")
+            intentos ++;
+            print("Intentos: ${intentos} - ");
+        }
+    }
+    println("El numero era: ${respuesta}");
+    print("Te tomo: ${intentos} intentos en acertar")
+}
+ 
+fun validar_numero_de_entrada(): Int {
+    var respuesta: String? = null;
+    var respuesta_valida: Int? = null;
+    var intentos: Int = 0;
+    while (true){
+        respuesta = readlnOrNull()
+        if(respuesta == null){
+            println("Ese nuemro es decimal. Por favor vuelve a intentar con un numero entero");
+            continue
+        }
+        respuesta_valida = respuesta!!.toIntOrNull();
+        if(respuesta_valida == null){
+            println("Eso que pusiste no es un numero. Por favor intenta con un numero");
+        }
+        else{
+            return respuesta_valida!!;
+        }
+    }
+    return 0
+}
